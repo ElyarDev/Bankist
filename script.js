@@ -60,3 +60,5 @@ const btnCloseCookie = document.querySelector('.btn--close-cookie');
 btnCloseCookie.addEventListener('click', function () {
   message.remove();
 })
+
+// *******************************************************************************************
