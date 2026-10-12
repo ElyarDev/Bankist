@@ -32,6 +32,24 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+// SMOOTH SCROLL
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+
+  // scrolling
+  // window.scrollTo({
+  //   left: s1coords.left + window.scrollX,
+  //   top: s1coords.top + window.scrollY,
+  //   behavior: 'smooth',
+  // })
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+})
+
 //////////////////////////////////
 //////////////////////////////////
 ////LECTURES
@@ -62,3 +80,13 @@ btnCloseCookie.addEventListener('click', function () {
 })
 
 // *******************************************************************************************
+
+message.style.backgroundColor = '#37383d';
+message.style.width = '104.1%';
+
+// console.log(message.style.backgroundColor);
+// console.log(getComputedStyle(message).color);
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
