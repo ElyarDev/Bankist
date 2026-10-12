@@ -1,12 +1,15 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -34,9 +37,6 @@ document.addEventListener('keydown', function (e) {
 
 // SMOOTH SCROLL
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect();
 
@@ -48,6 +48,32 @@ btnScrollTo.addEventListener('click', function (e) {
   // })
 
   section1.scrollIntoView({ behavior: 'smooth' });
+})
+
+// PAGE NAVIGATION
+
+// first way
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+
+//     const id = this.getAttribute('href');
+//     console.log(id);
+
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' })
+//   })
+// })
+
+// second way (BEST)
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // checking
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
 })
 
 //////////////////////////////////
@@ -90,3 +116,26 @@ message.style.width = '104.1%';
 message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
 
 // document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// *******************************************************************************************
+
+// const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+// const randomColor = () => `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+// console.log(randomColor(0, 255));
+
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log(e.target);
+
+//   e.stopPropagation();
+// });
+
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log(e.target);
+// });
+
+// document.querySelector('.nav').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log(e.target);
+// });
