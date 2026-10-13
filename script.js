@@ -14,6 +14,8 @@ const tabsContent = document.querySelectorAll('.operations__content');
 
 const nav = document.querySelector('.nav');
 
+const header = document.querySelector('.header');
+
 ///////////////////////////////////////
 // Modal window
 
@@ -125,16 +127,38 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 
 // STICKY NAVIGATION
 
-const initialCoords = section1.getBoundingClientRect();
+// const initialCoords = section1.getBoundingClientRect();
+// window.addEventListener('scroll', function (e) {
+//   if (window.scrollY > initialCoords.top) {
+//     nav.classList.add('sticky');
+//   }
+//   else {
+//     nav.classList.remove('sticky');
+//   }
+// })
 
-window.addEventListener('scroll', function (e) {
-  if (window.scrollY > initialCoords.top) {
+// STICKY NAVIGATION (intersection Observer)
+
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) {
     nav.classList.add('sticky');
   }
   else {
     nav.classList.remove('sticky');
   }
-})
+}
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+
+headerObserver.observe(header);
 
 //////////////////////////////////
 //////////////////////////////////
@@ -144,7 +168,6 @@ window.addEventListener('scroll', function (e) {
 // console.log(document.head);
 // console.log(document.body);
 
-const header = document.querySelector('.header');
 // const allSections = document.querySelectorAll('.section');
 // console.log(allSections);
 
@@ -213,3 +236,17 @@ message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) +
 // console.log(h1.parentElement);
 
 // *******************************************************************************************
+
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   })
+// }
+
+// const obsOption = {
+//   root: null,
+//   threshold: 0.1
+// }
+
+// const observer = new IntersectionObserver(obsCallback, obsOption);
+// observer.observe(section1);
